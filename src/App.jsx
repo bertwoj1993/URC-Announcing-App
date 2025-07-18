@@ -11,6 +11,9 @@ export default function App() {
   const [loading, setLoading] = useState(true); // Loading state for data fetch
   const [error, setError] = useState(null); // Error state for data fetch
 
+  // URC Logo URL - UPDATED TO USE YOUR PROVIDED DIRECT IMAGE URL
+  const URC_LOGO_URL = 'https://i.imgur.com/FGZyoLc.jpeg';
+
   // Effect to fetch all driver data from Google Sheet API when component mounts
   useEffect(() => {
     const fetchDrivers = async () => {
@@ -68,30 +71,38 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-gray-100 font-inter flex items-center justify-center">
-        <p className="text-2xl text-gray-400">Loading driver data...</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white font-inter flex items-center justify-center">
+        <p className="text-2xl text-gray-300">Loading driver data...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-gray-100 font-inter flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white font-inter flex items-center justify-center">
         <p className="text-2xl text-red-500 text-center p-4">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-gray-100 font-inter p-4 sm:p-8 flex items-center justify-center">
-      <div className="w-full max-w-4xl bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-10 border border-gray-700">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-center text-red-500 mb-8 tracking-tight">
-          URC Announcing Dashboard
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black font-inter p-4 sm:p-8 flex items-center justify-center">
+      <div className="w-full max-w-4xl bg-gray-900 rounded-xl shadow-2xl p-6 sm:p-10 border-2 border-red-700 text-center"> {/* Main card background, border, shadow */}
+        {/* URC Logo */}
+        <img
+          src={URC_LOGO_URL}
+          alt="URC Logo"
+          className="mx-auto mb-6 max-w-[250px] sm:max-w-[300px] rounded-lg shadow-md"
+          onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/300x100/000080/FFFFFF?text=URC+Logo+Error'; }} // Fallback
+        />
+
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-8 tracking-tight bg-red-700 py-3 px-6 rounded-lg shadow-lg mx-auto max-w-fit"> {/* Title with red background */}
+          Announcing Dashboard
         </h1>
 
         {/* Car Number Input */}
-        <div className="mb-8">
-          <label htmlFor="carNumber" className="block text-xl sm:text-2xl font-semibold text-gray-300 mb-3">
+        <div className="mb-8 max-w-md mx-auto p-4 bg-blue-900 rounded-lg shadow-inner border border-blue-700"> {/* Input section styling */}
+          <label htmlFor="carNumber" className="block text-xl sm:text-2xl font-semibold text-white mb-3">
             Enter Car Number:
           </label>
           <input
@@ -100,45 +111,45 @@ export default function App() {
             value={carNumberInput}
             onChange={(e) => setCarNumberInput(e.target.value)}
             placeholder="e.g., 24"
-            className="w-full p-4 text-3xl sm:text-4xl font-bold text-red-500 bg-gray-900 border border-red-700 rounded-lg focus:outline-none focus:ring-4 focus:ring-red-600 focus:border-transparent transition duration-300 ease-in-out"
+            className="w-full p-4 text-3xl sm:text-4xl font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out" // Input field styling
             autoFocus
           />
         </div>
 
         {/* Driver Information Card */}
         {driverData ? (
-          <div className="bg-gray-700 rounded-lg p-6 sm:p-8 mb-8 shadow-inner border border-gray-600">
-            <h2 className="text-3xl sm:text-4xl font-bold text-red-400 mb-5 text-center">
+          <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 shadow-inner border border-blue-700 text-left"> {/* Driver details card styling */}
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md"> {/* Sub-title with red background */}
               Driver Details
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg sm:text-xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg sm:text-xl text-white"> {/* Text color set to white */}
               {/* Display order matches your request */}
               <p><span className="font-semibold text-gray-300">Hometown:</span> {driverData.hometown}</p>
               <p><span className="font-semibold text-gray-300">Car Owner:</span> {driverData.carOwner}</p>
               <p><span className="font-semibold text-gray-300">Sponsors:</span> {driverData.sponsors}</p>
               <p><span className="font-semibold text-gray-300">Engine:</span> {driverData.engineManufacture}</p>
               <p><span className="font-semibold text-gray-300">Chassis:</span> {driverData.chassisManufacture}</p>
-              <p><span className="font-semibold text-gray-300">Car Number:</span> <span className="text-red-300">{driverData.carNumber}</span></p>
+              <p><span className="font-semibold text-gray-300">Car Number:</span> <span className="text-yellow-400">{driverData.carNumber}</span></p> {/* Car number in yellow */}
               <p><span className="font-semibold text-gray-300">Nickname:</span> "{driverData.nickname}"</p>
               <p><span className="font-semibold text-gray-300">Name:</span> {driverData.name}</p>
             </div>
           </div>
         ) : carNumberInput.trim() !== '' ? (
-          <div className="bg-gray-700 rounded-lg p-6 sm:p-8 mb-8 text-center text-red-300 text-xl sm:text-2xl font-semibold">
+          <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 text-center text-yellow-400 text-xl sm:text-2xl font-semibold border border-blue-700 shadow-inner"> {/* Styling for not found/empty state */}
             Driver not found for car number "{carNumberInput}".
           </div>
         ) : (
-          <div className="bg-gray-700 rounded-lg p-6 sm:p-8 mb-8 text-center text-gray-400 text-xl sm:text-2xl font-semibold">
+          <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 text-center text-white text-xl sm:text-2xl font-semibold border border-blue-700 shadow-inner"> {/* Styling for initial empty state */}
             Enter a car number above to see driver details.
           </div>
         )}
 
         {/* Driver Stats Section */}
-        <div className="bg-gray-700 rounded-lg p-6 sm:p-8 shadow-inner border border-gray-600">
-          <h2 className="text-3xl sm:text-4xl font-bold text-red-400 mb-5 text-center">
+        <div className="bg-blue-900 rounded-lg p-6 sm:p-8 shadow-inner border border-blue-700 text-left">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md"> {/* Sub-title with red background */}
             Driver Stats
           </h2>
-          <p className="text-lg sm:text-xl leading-relaxed text-gray-200 whitespace-pre-wrap">
+          <p className="text-lg sm:text-xl leading-relaxed text-white whitespace-pre-wrap"> {/* Text color set to white */}
             {driverStats || "Driver stats will appear here."}
           </p>
         </div>
