@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // Import useRef
 
 // IMPORTANT: Only URC Sprints and Selinsgrove Ford Super Late Models are included now.
 // Divisions are now sorted alphabetically by name.
@@ -22,7 +22,8 @@ export default function App() {
   const [loading, setLoading] = useState(false); // Initial loading is false until a division is selected
   const [error, setError] = useState(null);
 
-  // URC Logo has been removed from here.
+  // Create a ref for the driver details card
+  const driverDetailsRef = useRef(null);
 
   // Effect to fetch driver data when selectedDivisionUrl changes
   useEffect(() => {
@@ -84,6 +85,10 @@ export default function App() {
     setDriverData(foundDriver);
     if (foundDriver) {
       setDriverStats(foundDriver.stats || 'No specific stats available for this driver.');
+      // Scroll to the driver details card when data is found
+      if (driverDetailsRef.current) {
+        driverDetailsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     } else {
       setDriverStats('Driver not found. Please check the car number.');
     }
@@ -158,7 +163,7 @@ export default function App() {
 
         {/* Driver Information Card (Only show if driverData is available and no loading/error) */}
         {driverData && !loading && !error && selectedDivisionUrl && (
-          <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 shadow-inner border border-blue-700 text-left">
+          <div ref={driverDetailsRef} className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 shadow-inner border border-blue-700 text-left">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md">
               Driver Details
             </h2>
