@@ -104,11 +104,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black font-inter p-4 sm:p-8 flex items-center justify-center">
       <div className="w-full max-w-4xl bg-gray-900 rounded-xl shadow-2xl p-6 sm:p-10 border-2 border-red-700 text-center">
-        {/* URC Logo has been removed from here */}
-
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-8 tracking-tight bg-red-700 py-3 px-6 rounded-lg shadow-lg mx-auto max-w-fit">
-          Announcing Dashboard
-        </h1>
+        {/* Announcing Dashboard title has been removed */}
 
         {/* Division Selector */}
         <div className="mb-8 max-w-md mx-auto p-4 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
