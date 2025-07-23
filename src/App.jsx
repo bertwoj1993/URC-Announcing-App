@@ -102,20 +102,20 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black font-inter p-4 sm:p-8 flex items-center justify-center">
-      <div className="w-full max-w-4xl bg-gray-900 rounded-xl shadow-2xl p-6 sm:p-10 border-2 border-red-700 text-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black font-inter p-2 sm:p-4 flex items-center justify-center">
+      <div className="w-full max-w-4xl bg-gray-900 rounded-xl shadow-2xl p-4 sm:p-6 border-2 border-red-700 text-center">
         {/* Announcing Dashboard title has been removed */}
 
         {/* Division Selector */}
-        <div className="mb-8 max-w-md mx-auto p-4 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
-          <label htmlFor="division-select" className="block text-xl sm:text-2xl font-semibold text-white mb-3">
+        <div className="mb-5 max-w-md mx-auto p-2 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
+          <label htmlFor="division-select" className="block text-base sm:text-lg font-semibold text-white mb-2">
             Select Division:
           </label>
           <select
             id="division-select"
             value={selectedDivisionUrl}
             onChange={handleDivisionChange}
-            className="w-full p-3 text-xl sm:text-2xl font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out cursor-pointer"
+            className="w-full p-1 text-lg sm:text-xl font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out cursor-pointer"
           >
             {DIVISION_APIS.map((division) => (
               <option key={division.name} value={division.url}>
@@ -126,8 +126,8 @@ export default function App() {
         </div>
 
         {/* Car Number Input */}
-        <div className="mb-8 max-w-md mx-auto p-4 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
-          <label htmlFor="carNumber" className="block text-xl sm:text-2xl font-semibold text-white mb-3">
+        <div className="mb-5 max-w-md mx-auto p-2 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
+          <label htmlFor="carNumber" className="block text-base sm:text-lg font-semibold text-white mb-2">
             Enter Car Number:
           </label>
           <input
@@ -136,24 +136,24 @@ export default function App() {
             value={carNumberInput}
             onChange={(e) => setCarNumberInput(e.target.value)}
             placeholder="e.g., 24"
-            className="w-full p-4 text-3xl sm:text-4xl font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out"
+            className="w-full p-2 text-xl sm:text-2xl font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out"
             autoFocus
           />
         </div>
 
         {/* Loading/Error/No Division Selected States */}
         {loading && (
-          <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 text-center text-white text-xl sm:text-2xl font-semibold border border-blue-700 shadow-inner">
+          <div className="bg-blue-900 rounded-lg p-4 sm:p-6 mb-6 text-center text-white text-lg sm:text-xl font-semibold border border-blue-700 shadow-inner">
             Loading driver data...
           </div>
         )}
         {error && !loading && (
-          <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 text-center text-red-500 text-xl sm:text-2xl font-semibold border border-blue-700 shadow-inner">
+          <div className="bg-blue-900 rounded-lg p-4 sm:p-6 mb-6 text-center text-red-500 text-lg sm:text-xl font-semibold border border-blue-700 shadow-inner">
             {error}
           </div>
         )}
         {!selectedDivisionUrl && !loading && !error && (
-            <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 text-center text-white text-xl sm:text-2xl font-semibold border border-blue-700 shadow-inner">
+            <div className="bg-blue-900 rounded-lg p-4 sm:p-6 mb-6 text-center text-white text-lg sm:text-xl font-semibold border border-blue-700 shadow-inner">
                 Please select a division from the dropdown above.
             </div>
         )}
@@ -162,8 +162,8 @@ export default function App() {
         {driverData && !loading && !error && selectedDivisionUrl && (
           <div ref={driverInfoSectionRef}> {/* Apply the ref to this new wrapper */}
             {/* Driver Information Card */}
-            <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 shadow-inner border border-blue-700 text-left">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md">
+            <div className="bg-blue-900 rounded-lg p-5 sm:p-8 mb-8 shadow-inner border border-blue-700 text-left">
+              <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4 text-center bg-red-700 py-1 rounded-md shadow-md">
                 Driver Details
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg sm:text-xl text-white">
@@ -179,8 +179,8 @@ export default function App() {
             </div>
 
             {/* Driver Stats Section */}
-            <div className="bg-blue-900 rounded-lg p-6 sm:p-8 shadow-inner border border-blue-700 text-left">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md">
+            <div className="bg-blue-900 rounded-lg p-5 sm:p-8 shadow-inner border border-blue-700 text-left">
+              <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4 text-center bg-red-700 py-1 rounded-md shadow-md">
                 Driver Stats
               </h2>
               <p className="text-lg sm:text-xl leading-relaxed text-white whitespace-pre-wrap">
@@ -192,7 +192,7 @@ export default function App() {
 
         {/* Message when car number is entered but driver not found in selected division */}
         {selectedDivisionUrl && !loading && !error && carNumberInput.trim() !== '' && !driverData && (
-            <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 text-center text-yellow-400 text-xl sm:text-2xl font-semibold border border-blue-700 shadow-inner">
+            <div className="bg-blue-900 rounded-lg p-4 sm:p-6 mb-6 text-center text-yellow-400 text-lg sm:text-xl font-semibold border border-blue-700 shadow-inner">
                 Driver not found for car number "{carNumberInput}" in the selected division.
             </div>
         )}
