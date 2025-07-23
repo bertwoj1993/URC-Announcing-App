@@ -22,8 +22,8 @@ export default function App() {
   const [loading, setLoading] = useState(false); // Initial loading is false until a division is selected
   const [error, setError] = useState(null);
 
-  // Create a ref for the driver details card
-  const driverDetailsRef = useRef(null);
+  // Create a ref for the entire driver information section (details + stats)
+  const driverInfoSectionRef = useRef(null);
 
   // Effect to fetch driver data when selectedDivisionUrl changes
   useEffect(() => {
@@ -78,16 +78,18 @@ export default function App() {
       return;
     }
 
+    // Convert both the input and the driver's car number to lowercase for case-insensitive comparison
+    const searchCarNumber = carNumberInput.trim().toLowerCase();
     const foundDriver = allDrivers.find(
-      (driver) => driver.carNumber === carNumberInput.trim()
+      (driver) => String(driver.carNumber).toLowerCase() === searchCarNumber
     );
 
     setDriverData(foundDriver);
     if (foundDriver) {
       setDriverStats(foundDriver.stats || 'No specific stats available for this driver.');
-      // Scroll to the driver details card when data is found
-      if (driverDetailsRef.current) {
-        driverDetailsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Scroll to the entire driver information section when data is found
+      if (driverInfoSectionRef.current) {
+        driverInfoSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else {
       setDriverStats('Driver not found. Please check the car number.');
@@ -160,35 +162,35 @@ export default function App() {
             </div>
         )}
 
-
-        {/* Driver Information Card (Only show if driverData is available and no loading/error) */}
+        {/* New wrapper div for both Driver Details and Driver Stats */}
         {driverData && !loading && !error && selectedDivisionUrl && (
-          <div ref={driverDetailsRef} className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 shadow-inner border border-blue-700 text-left">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md">
-              Driver Details
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg sm:text-xl text-white">
-              <p><span className="font-semibold text-gray-300">Hometown:</span> {driverData.hometown}</p>
-              <p><span className="font-semibold text-gray-300">Car Owner:</span> {driverData.carOwner}</p>
-              <p><span className="font-semibold text-gray-300">Sponsors:</span> {driverData.sponsors}</p>
-              <p><span className="font-semibold text-gray-300">Engine:</span> {driverData.engineManufacture}</p>
-              <p><span className="font-semibold text-gray-300">Chassis:</span> {driverData.chassisManufacture}</p>
-              <p><span className="font-semibold text-gray-300">Car Number:</span> <span className="text-yellow-400">{driverData.carNumber}</span></p>
-              <p><span className="font-semibold text-gray-300">Nickname:</span> "{driverData.nickname}"</p>
-              <p><span className="font-semibold text-gray-300">Name:</span> {driverData.name}</p>
+          <div ref={driverInfoSectionRef}> {/* Apply the ref to this new wrapper */}
+            {/* Driver Information Card */}
+            <div className="bg-blue-900 rounded-lg p-6 sm:p-8 mb-8 shadow-inner border border-blue-700 text-left">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md">
+                Driver Details
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg sm:text-xl text-white">
+                <p><span className="font-semibold text-gray-300">Hometown:</span> {driverData.hometown}</p>
+                <p><span className="font-semibold text-gray-300">Car Owner:</span> {driverData.carOwner}</p>
+                <p><span className="font-semibold text-gray-300">Sponsors:</span> {driverData.sponsors}</p>
+                <p><span className="font-semibold text-gray-300">Engine:</span> {driverData.engineManufacture}</p>
+                <p><span className="font-semibold text-gray-300">Chassis:</span> {driverData.chassisManufacture}</p>
+                <p><span className="font-semibold text-gray-300">Car Number:</span> <span className="text-yellow-400">{driverData.carNumber}</span></p>
+                <p><span className="font-semibold text-gray-300">Nickname:</span> "{driverData.nickname}"</p>
+                <p><span className="font-semibold text-gray-300">Name:</span> {driverData.name}</p>
+              </div>
             </div>
-          </div>
-        )}
 
-        {/* Driver Stats Section (Only show if driverData is available and no loading/error) */}
-        {driverData && !loading && !error && selectedDivisionUrl && (
-          <div className="bg-blue-900 rounded-lg p-6 sm:p-8 shadow-inner border border-blue-700 text-left">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md">
-              Driver Stats
-            </h2>
-            <p className="text-lg sm:text-xl leading-relaxed text-white whitespace-pre-wrap">
-              {driverStats || "No specific stats available for this driver."}
-            </p>
+            {/* Driver Stats Section */}
+            <div className="bg-blue-900 rounded-lg p-6 sm:p-8 shadow-inner border border-blue-700 text-left">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-center bg-red-700 py-2 rounded-md shadow-md">
+                Driver Stats
+              </h2>
+              <p className="text-lg sm:text-xl leading-relaxed text-white whitespace-pre-wrap">
+                {driverStats || "No specific stats available for this driver."}
+              </p>
+            </div>
           </div>
         )}
 
