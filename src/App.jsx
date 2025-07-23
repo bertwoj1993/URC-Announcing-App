@@ -107,15 +107,15 @@ export default function App() {
         {/* Announcing Dashboard title has been removed */}
 
         {/* Division Selector */}
-        <div className="mb-5 max-w-md mx-auto p-2 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
-          <label htmlFor="division-select" className="block text-base sm:text-lg font-semibold text-white mb-2">
+        <div className="mb-4 max-w-md mx-auto p-2 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
+          <label htmlFor="division-select" className="block text-sm sm:text-base font-semibold text-white mb-1">
             Select Division:
           </label>
           <select
             id="division-select"
             value={selectedDivisionUrl}
             onChange={handleDivisionChange}
-            className="w-full p-1 text-lg sm:text-xl font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out cursor-pointer"
+            className="w-full p-1 text-base sm:text-lg font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out cursor-pointer"
           >
             {DIVISION_APIS.map((division) => (
               <option key={division.name} value={division.url}>
@@ -126,8 +126,8 @@ export default function App() {
         </div>
 
         {/* Car Number Input */}
-        <div className="mb-5 max-w-md mx-auto p-2 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
-          <label htmlFor="carNumber" className="block text-base sm:text-lg font-semibold text-white mb-2">
+        <div className="mb-4 max-w-md mx-auto p-2 bg-blue-900 rounded-lg shadow-inner border border-blue-700">
+          <label htmlFor="carNumber" className="block text-sm sm:text-base font-semibold text-white mb-1">
             Enter Car Number:
           </label>
           <input
@@ -136,7 +136,7 @@ export default function App() {
             value={carNumberInput}
             onChange={(e) => setCarNumberInput(e.target.value)}
             placeholder="e.g., 24"
-            className="w-full p-2 text-xl sm:text-2xl font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out"
+            className="w-full p-1 text-base sm:text-lg font-bold text-yellow-400 bg-gray-950 border border-yellow-500 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-600 focus:border-transparent transition duration-300 ease-in-out"
             autoFocus
           />
         </div>
